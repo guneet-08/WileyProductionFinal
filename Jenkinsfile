@@ -37,10 +37,13 @@ pipeline {
     }
 
     stage('Deploying Python container to Kubernetes') {
+      environment {
+        KUBERNETES_CLOUD = 'minikube'
+      }
       steps {
         script {
-          sh 'kubectl apply -f deployment.yaml --context minikube'
-          sh 'kubectl apply -f service.yaml --context minikube'
+          sh 'kubectl apply -f deployment.yaml'
+          sh 'kubectl apply -f service.yaml'
         }
       }
     }
